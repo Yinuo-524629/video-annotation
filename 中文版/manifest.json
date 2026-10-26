@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "视频批注",
+  "version": "1.2.3",
+  "description": "在 YouTube 和哔哩哔哩视频上快速记录时间点批注并导入导出 XLSX。",
+  "permissions": [
+    "storage",
+    "downloads"
+  ],
+  "host_permissions": [
+    "https://www.youtube.com/*",
+    "https://youtube.com/*",
+    "https://www.bilibili.com/*",
+    "https://bilibili.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*",
+        "https://youtube.com/*",
+        "https://www.bilibili.com/*",
+        "https://bilibili.com/*"
+      ],
+      "js": [
+        "xlsx-lite-v2.js",
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "commands": {
+    "add-annotation": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Period",
+        "mac": "Command+Shift+Period"
+      },
+      "description": "记录当前视频时间并打开批注输入"
+    }
+  },
+  "options_page": "options.html"
+}

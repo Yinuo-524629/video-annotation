@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "Video Annotation",
+  "version": "1.2.3",
+  "description": "Capture timestamps, ranges and custom annotations on YouTube and Bilibili. Import and export colored XLSX files.",
+  "permissions": [
+    "storage",
+    "downloads"
+  ],
+  "host_permissions": [
+    "https://www.youtube.com/*",
+    "https://youtube.com/*",
+    "https://www.bilibili.com/*",
+    "https://bilibili.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*",
+        "https://youtube.com/*",
+        "https://www.bilibili.com/*",
+        "https://bilibili.com/*"
+      ],
+      "js": [
+        "xlsx-lite-v2.js",
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "commands": {
+    "add-annotation": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Period",
+        "mac": "Command+Shift+Period"
+      },
+      "description": "Capture or adjust the start time and open the annotation editor"
+    }
+  },
+  "options_page": "options.html"
+}
